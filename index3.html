@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Greeting Boxes</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f2f5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    h1 {
+      color: #333;
+      margin-bottom: 30px;
+    }
+
+    .input-group {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 30px;
+    }
+
+    #name-input {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 2px solid #ccc;
+      width: 200px;
+    }
+
+    #greet-btn {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      background-color: #5cb85c;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    #greet-btn:hover {
+      background-color: #4cae4c;
+    }
+
+    .boxes {
+      display: flex;
+      gap: 20px;
+    }
+
+    .box {
+      width: 100px;
+      height: 100px;
+      background-color: #eee;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      user-select: none;
+    }
+
+    .box:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <h1 id="greeting">Hello</h1>
+
+  <!-- Input Field + Greet Button -->
+  <div class="input-group">
+    <input type="text" id="name-input" placeholder="Enter your name">
+    <button id="greet-btn">Greet Me</button>
+  </div>
+
+  <!-- Boxes -->
+  <div class="boxes">
+    <div class="box" id="red-box">Red</div>
+    <div class="box" id="blue-box">Blue</div>
+    <div class="box" id="green-box">Green</div>
+    <div class="box" id="yellow-box">Yellow</div>
+  </div>
+
+  <script>
+    // Header greeting functionality
+    const greeting = document.getElementById('greeting');
+    const nameInput = document.getElementById('name-input');
+    const greetBtn = document.getElementById('greet-btn');
+
+    greetBtn.addEventListener('click', () => {
+      const name = nameInput.value.trim();
+      if(name) {
+        greeting.textContent = `Hello, ${name}`;
+        nameInput.value = '';
+      } else {
+        greeting.textContent = 'Hello';
+      }
+    });
+
+    // Boxes functionality
+    const boxes = [
+      {id: 'red-box', color: 'red'},
+      {id: 'blue-box', color: 'blue'},
+      {id: 'green-box', color: 'green'},
+      {id: 'yellow-box', color: 'yellow'}
+    ];
+
+    boxes.forEach(box => {
+      const element = document.getElementById(box.id);
+      element.addEventListener('click', () => {
+        element.style.backgroundColor = box.color;
+        // Set text color for contrast
+        if(box.color === 'yellow') {
+          element.style.color = 'black';
+        } else {
+          element.style.color = 'white';
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
